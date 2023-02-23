@@ -1,6 +1,6 @@
 {
-  "name": "opentelemetry-sdk-workers",
-  "version": "0.6.2",
+  "name": "@middleware.io/opentelemetry-sdk-workers",
+  "version": "0.6.19",
   "description": "Open Telemetry Cloudflare Workers Library. Provides a basic sdk for instrumenting workers.",
   "module": "dist/index.mjs",
   "exports": {
@@ -65,10 +65,10 @@
     "worker",
     "tracing"
   ],
-  "author": "Richard Simpson <richicoder1@outlook.com>",
+  "author": "Middleware Dev <dev@middleware.io>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RichiCoder1/opentelemetry-sdk-workers.git"
+    "url": "https://github.com/middleware-labs/opentelemetry-sdk-workers.git"
   },
   "publishConfig": {
     "access": "public"

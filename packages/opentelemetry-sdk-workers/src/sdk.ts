@@ -93,6 +93,8 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
 		}) as Bindings<TEnv>;
 	}
 
+    public projectName: any;
+    public serviceName: any;
     private readonly traceProvider: BasicTracerProvider;
     private readonly traceExporter: SpanExporter;
     private readonly logExporter?: LogExporter;
@@ -174,6 +176,15 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
                 [SemanticResourceAttributes.PROCESS_RUNTIME_NAME]: 'Cloudflare-Workers',
             });
 
+
+        if ('resource' in config) {
+            if ('project.name' in config.resource) {
+                this.projectName = config.resource['project.name'];
+            }
+            if ('service.name' in config.resource) {
+                this.serviceName = config.resource['service.name'];
+            }
+        }
 
         if ('traceExporter' in config) {
             this.traceExporter = config.traceExporter;
@@ -461,7 +472,9 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
             },
             resource: this.traceProvider.resource,
             attributes: {
-                "log.extra": extra
+                "log.extra": extra,
+                "project.name": this.projectName,
+                "service.name": this.serviceName,
             }
         });
     }
