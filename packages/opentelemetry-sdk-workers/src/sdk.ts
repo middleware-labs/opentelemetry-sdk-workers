@@ -176,15 +176,14 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
                 [SemanticResourceAttributes.PROCESS_RUNTIME_NAME]: 'Cloudflare-Workers',
             });
 
-
-        if ('resource' in config) {
-            if ('project.name' in config.resource) {
-                this.projectName = config.resource['project.name'];
-            }
-            if ('service.name' in config.resource) {
-                this.serviceName = config.resource['service.name'];
-            }
-        }
+		if (config && config.resource && config.resource.attributes) {
+			if ("project.name" in config.resource.attributes) {
+				this.projectName = config.resource.attributes["project.name"];
+			}
+			if ("service.name" in config.resource.attributes) {
+				this.serviceName = config.resource.attributes["service.name"];
+			}
+		}
 
         if ('traceExporter' in config) {
             this.traceExporter = config.traceExporter;
@@ -457,8 +456,8 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
         }
 
 		const [ message, extra ] = messages;
-
-        this.#logs.push({
+		let attributes = Object.assign(extra?extra:{},{ "project.name": this.projectName,"service.name": this.serviceName});
+		this.#logs.push({
             timestamp: hrTime(Date.now()),
             observedTimestamp: hrTime(Date.now()),
             spanId,
@@ -471,11 +470,7 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
                 name: "opentelemetry-sdk-workers",
             },
             resource: this.traceProvider.resource,
-            attributes: {
-                "log.extra": extra,
-                "project.name": this.projectName,
-                "service.name": this.serviceName,
-            }
+            attributes
         });
     }
 
