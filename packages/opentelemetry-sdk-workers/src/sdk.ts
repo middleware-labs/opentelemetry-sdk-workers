@@ -222,7 +222,7 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
 
 			if (this.consoleLogEnabled) {
 				const [ message, extra ] = messages;
-				console[consoleLevel](message, extra);
+				console[consoleLevel](message, extra ? JSON.stringify(extra) : "");
 			}
 
             if (this.logExporter) {
@@ -456,7 +456,7 @@ export class WorkersSDK<TEnv extends Record<string, unknown> = {}> {
         }
 
 		const [ message, extra ] = messages;
-		let attributes = Object.assign(extra?extra:{},{ "project.name": this.projectName,"service.name": this.serviceName});
+        let attributes = Object.assign(extra?extra:{},{ "project.name": this.projectName,"service.name": this.serviceName});
 		this.#logs.push({
             timestamp: hrTime(Date.now()),
             observedTimestamp: hrTime(Date.now()),
