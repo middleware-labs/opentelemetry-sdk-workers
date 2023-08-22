@@ -1,24 +1,24 @@
 {
-  "name": "@middleware.io/opentelemetry-sdk-workers",
-  "version": "0.6.21",
+  "name": "@middleware.io/opentelemetry-sdk-workers-test",
+  "version": "0.0.667",
   "description": "Open Telemetry Cloudflare Workers Library. Provides a basic sdk for instrumenting workers.",
-  "module": "dist/index.mjs",
+  "main": "dist/index.js",  
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/index.mjs"
+      "default": "./dist/index.js" 
     },
     "./performance": {
       "types": "./dist/performance.d.ts",
-      "default": "./dist/performance.mjs"
+      "default": "./dist/performance.js"  
     },
     "./exporters/OTLPProtoTraceExporter": {
       "types": "./dist/exporters/OTLPProtoTraceExporter.d.ts",
-      "default": "./dist/exporters/OTLPProtoTraceExporter.mjs"
+      "default": "./dist/exporters/OTLPProtoTraceExporter.js"  
     },
     "./exporters/OTLPProtoLogExporter": {
       "types": "./dist/exporters/OTLPProtoLogExporter.d.ts",
-      "default": "./dist/exporters/OTLPProtoLogExporter.mjs"
+      "default": "./dist/exporters/OTLPProtoLogExporter.js"
     },
     "./*": {
       "default": null
